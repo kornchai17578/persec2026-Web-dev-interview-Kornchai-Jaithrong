@@ -20,4 +20,12 @@ describe('autocomplete', () => {
   it('respects maxResult even when more items match', () => {
     expect(autocomplete('th', ['Mother', 'Think', 'Worthy'], 1)).toEqual(['Think']);
   });
+
+  it('ranks middle matches before end matches, even when the end match is at a lower index', () => {
+    expect(autocomplete('th', ['Both', 'Brother', 'Thing'], 5)).toEqual(['Thing', 'Brother', 'Both']);
+  });
+
+  it('returns an empty array when maxResult is negative', () => {
+    expect(autocomplete('th', ['Think', 'Mother'], -1)).toEqual([]);
+  });
 });

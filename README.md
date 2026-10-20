@@ -22,17 +22,3 @@ npm install
 npm test        # run all tests once
 npm run build    # type-check only, no output emitted
 ```
-
-## Notes on assumptions
-
-- **Q2 (sort):** interpreted as "natural sort" — strings are split into
-  alternating letter/digit runs; digit runs compare numerically (so `TH2` <
-  `TH19`), everything else compares as text.
-- **Q3 (autocomplete):** ties (two items whose match starts at the same
-  index) keep their original relative order (stable sort); the spec gives
-  no tie-breaking rule beyond match position.
-- **Q6 (tribonacci):** the spec only shows examples where the seed has
-  exactly 3 numbers. For a shorter seed (0-2 numbers), each new term sums
-  whatever terms exist so far (up to the last 3), which stays consistent
-  with the "sum of the 3 preceding terms" rule once the sequence has at
-  least 3 entries.

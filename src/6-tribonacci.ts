@@ -1,25 +1,14 @@
-/**
- * Generates a Tribonacci-like sequence: each new term is the sum of the
- * up-to-three terms preceding it. `signature` is the seed (0-3 numbers,
- * taken as the first terms of the result) and `count` is the total length
- * of the returned sequence, signature included.
- *
- * When the signature has fewer than 3 numbers there is not yet a "sum of
- * the 3 preceding terms" to fall back on, so each new term sums whatever
- * terms already exist (up to the last 3) - this keeps the rule consistent
- * while still matching every example where signature.length === 3.
- */
 export function tribonacci(signature: number[], count: number): number[] {
   if (count < 0) {
     throw new Error('tribonacci expects a non-negative count');
   }
 
-  const result = signature.slice(0, count);
+  const result = signature.slice(0, count); //ดึงค่าเริ่มต้นจาก signature และตัดให้เหลือไม่เกิน count
 
-  while (result.length < count) {
-    const lastThree = result.slice(-3);
-    const next = lastThree.reduce((sum, value) => sum + value, 0);
-    result.push(next);
+  while (result.length < count) { //ถ้ายังไม่ครบ count ให้คำนวณค่าต่อไป
+    const lastThree = result.slice(-3); //เอาค่าล่าสุด 3 ตัว
+    const next = lastThree.reduce((sum, value) => sum + value, 0); //รวมค่าล่าสุด 3 ตัวเข้าด้วยกัน
+    result.push(next); //เพิ่มค่าต่อไปใน result
   }
 
   return result;

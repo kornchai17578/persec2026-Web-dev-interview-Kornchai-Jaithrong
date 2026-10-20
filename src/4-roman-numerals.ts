@@ -24,7 +24,6 @@ const ROMAN_SYMBOL_VALUE: Record<string, number> = {
   M: 1000,
 };
 
-/** Converts a positive integer (1-3999) to a Roman numeral string. */
 export function intToRoman(num: number): string {
   if (!Number.isInteger(num) || num <= 0) {
     throw new Error('intToRoman expects a positive integer');
@@ -35,15 +34,14 @@ export function intToRoman(num: number): string {
 
   for (const [value, symbol] of ROMAN_VALUES) {
     while (remaining >= value) {
-      result += symbol;
-      remaining -= value;
+      result += symbol; //result = result + symbol
+      remaining -= value; //remaining = remaining - value
     }
   }
 
   return result;
 }
 
-/** Converts a Roman numeral string back to its integer value. */
 export function romanToInt(roman: string): number {
   let total = 0;
 
@@ -55,11 +53,16 @@ export function romanToInt(roman: string): number {
       throw new Error(`Invalid roman numeral symbol: ${roman[i]}`);
     }
 
-    if (next !== undefined && current < next) {
+    if (next !== undefined && current < next) { //ถ้าน้อยกว่าให้ลบ IV = −1 + 5
       total -= current;
-    } else {
+    } else { //ถ้ามากกว่าหรือเท่ากันให้บวก VI = 5 + 1
       total += current;
     }
+  }
+
+  // เช็คว่าสัญลักษณ์โรมันที่แปลงกลับเป็นจำนวนเต็มแล้วสามารถแปลงกลับเป็นสัญลักษณ์โรมันเดิมได้หรือไม่
+  if (total <= 0 || intToRoman(total) !== roman) {
+    throw new Error(`Invalid roman numeral: ${roman}`);
   }
 
   return total;

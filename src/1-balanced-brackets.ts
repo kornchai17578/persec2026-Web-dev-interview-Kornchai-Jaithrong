@@ -1,7 +1,3 @@
-/**
- * Checks whether a string containing only '(', ')', '[', ']', '{', '}'
- * has all brackets properly opened and closed (and correctly nested).
- */
 export function isBalanced(input: string): boolean {
   const pairs: Record<string, string> = {
     ')': '(',
@@ -13,12 +9,12 @@ export function isBalanced(input: string): boolean {
   const stack: string[] = [];
 
   for (const char of input) {
-    if (openers.has(char)) {
+    if (openers.has(char)) { //ถ้าเป็นตัวเปิดให้เก็บไว้ใน stack
       stack.push(char);
       continue;
     }
 
-    if (char in pairs) {
+    if (char in pairs) { //ถ้าเป็นตัวปิดให้เอาตัวล่าสุดออกจาก stack แล้วเช็คว่าตรงกันไหม
       const last = stack.pop();
       if (last !== pairs[char]) {
         return false;
@@ -27,5 +23,5 @@ export function isBalanced(input: string): boolean {
     }
   }
 
-  return stack.length === 0;
+  return stack.length === 0; //ถ้า stack ว่างแสดงว่าตัวเปิดและตัวปิดตรงกันหมด
 }

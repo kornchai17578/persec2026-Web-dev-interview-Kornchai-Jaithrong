@@ -21,6 +21,17 @@ describe('romanToInt', () => {
   ])('romanToInt(%s) === %i', (input, expected) => {
     expect(romanToInt(input)).toBe(expected);
   });
+
+  it.each(['MCMLXXXXX', 'IIII', 'VV', 'IC', 'XM', 'IIV', ''])(
+    'throws on malformed numeral %j',
+    (input) => {
+      expect(() => romanToInt(input)).toThrow();
+    },
+  );
+
+  it('throws on an unknown symbol', () => {
+    expect(() => romanToInt('MCA')).toThrow();
+  });
 });
 
 describe('round trip', () => {
